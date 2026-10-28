@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="We introduce GimbalBlur, a large-scale benchmark dataset for smartphone image deblurring in the wild.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GimbalBlur: IMU-Paired Multi-Device Deblurring Benchmark in the Wild</title>
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="data:,">
+</head>
+<body>
+
+<!-- Icons: Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com
+     License - https://fontawesome.com/license/free (Icons: CC BY 4.0) -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="icon-pdf" viewBox="0 0 384 512"><path d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"/></symbol>
+  <symbol id="icon-file" viewBox="0 0 384 512"><path d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm64 236c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-64c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-72v8c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12zm96-114.1v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9z"/></symbol>
+  <symbol id="icon-github" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></symbol>
+  <symbol id="icon-database" viewBox="0 0 448 512"><path d="M448 73.143v45.714C448 159.143 347.667 192 224 192S0 159.143 0 118.857V73.143C0 32.857 100.333 0 224 0s224 32.857 224 73.143zM448 176v102.857C448 319.143 347.667 352 224 352S0 319.143 0 278.857V176c48.125 33.143 136.208 48.572 224 48.572S399.874 209.143 448 176zm0 160v102.857C448 479.143 347.667 512 224 512S0 479.143 0 438.857V336c48.125 33.143 136.208 48.572 224 48.572S399.874 369.143 448 336z"/></symbol>
+</svg>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 is-size-3-mobile publication-title">GimbalBlur: IMU-Paired Multi-Device Deblurring Benchmark in the Wild</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Akio Muragishi,</span>
+            <span class="author-block">Masahiro Okuda</span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Doshisha University</span>
+          </div>
+
+          <div class="is-size-5 publication-venue">WACV 2027</div>
+
+          <div class="publication-links">
+            <!-- TODO: link to the paper PDF -->
+            <span class="link-block">
+              <a href="#"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <svg class="svg-icon" aria-hidden="true"><use href="#icon-pdf"></use></svg>
+                </span>
+                <span>Paper</span>
+              </a>
+            </span>
+            <!-- TODO: link to the supplementary material -->
+            <span class="link-block">
+              <a href="#"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <svg class="svg-icon" aria-hidden="true"><use href="#icon-file"></use></svg>
+                </span>
+                <span>Supplementary</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://github.com/akionu/GimbalBlur"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <svg class="svg-icon" aria-hidden="true"><use href="#icon-github"></use></svg>
+                </span>
+                <span>Code</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://huggingface.co/datasets/akiomu/GimbalBlur"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <svg class="svg-icon" aria-hidden="true"><use href="#icon-database"></use></svg>
+                </span>
+                <span>Dataset</span>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <figure class="gb-figure gb-teaser">
+        <video autoplay muted loop playsinline width="1280" height="720"
+               aria-label="Three smartphones on synchronized gimbals capturing the same scene.">
+          <source src="./static/videos/capture_720.mp4" type="video/mp4">
+        </video>
+        <figcaption>
+          Three synchronized gimbals, each carrying a different smartphone, capture the same scene
+          under identical blur conditions. The battery-powered, portable design enables collection
+          in diverse indoor and outdoor environments.
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We introduce GimbalBlur, a large-scale benchmark dataset
+            for smartphone image deblurring in the wild.
+            Existing benchmarks force a choice between realism and controllability:
+            synthetic datasets offer perfect alignment but lack authentic ISP characteristics,
+            while real-world dual-camera datasets capture genuine blur
+            but introduce sensor mismatches and irreproducible conditions.
+            GimbalBlur resolves this tradeoff
+            by replaying gyroscope-recorded hand-shake trajectories
+            on three-axis gimbals in real 3D scenes.
+            A stop-and-go strategy captures blurred and sharp pairs
+            from the identical sensor and ISP pipeline,
+            eliminating the exposure and noise discrepancies
+            inherent in dual-camera systems.
+            Three synchronized gimbals carrying different smartphones
+            enable the first controlled cross-device comparison
+            under identical blur conditions.
+            The dataset comprises 200 scenes captured with three smartphone models
+            at three shutter speeds,
+            yielding 17,499 valid blurred and sharp pairs with synchronized IMU recordings above 400&nbsp;Hz.
+            Experiments with fourteen deblurring methods show that
+            (1)&nbsp;models trained on synthetic data rarely improve over the blurry input on real smartphone images,
+            (2)&nbsp;fine-tuning on GimbalBlur improves in-domain PSNR by up to 1.60&nbsp;dB and also raises RealBlur-J PSNR,
+            (3)&nbsp;an IMU-aided method trained on other data does not transfer to GimbalBlur without adaptation,
+            and (4)&nbsp;device-specific imaging pipelines cause performance gaps exceeding 2&nbsp;dB under identical blur.
+            The dataset and capture system are publicly available.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Dataset</h2>
+    <figure class="gb-figure">
+      <img src="./static/images/pipeline.jpg" width="1600" height="352"
+           alt="Capture pipeline: hand-shake recording, replay on three gimbals, and alignment and cropping.">
+      <figcaption>
+        Overview of the GimbalBlur capture pipeline.
+        (a)&nbsp;Hand-shake angular velocity is recorded from a smartphone gyroscope.
+        (b)&nbsp;Recorded trajectories are replayed on three synchronized gimbals, and each smartphone
+        captures a sharp ground truth (gimbal stationary) and a blurred image (gimbal replaying shake).
+        (c)&nbsp;Ground-truth images are aligned to the blurred frame via homography and centrally cropped.
+      </figcaption>
+    </figure>
+    <figure class="gb-figure">
+      <img src="./static/images/samples.jpg" width="1600" height="408"
+           alt="Sharp and blurred images of one scene at three shutter speeds and ten blur trajectories.">
+      <figcaption>
+        Example images from a single scene in GimbalBlur (Oppo Reno&nbsp;11A).
+        Each column shows a different blur trajectory; rows correspond to shutter speeds of 1/2, 1/8, and 1/30&nbsp;s.
+        Blur severity increases with exposure time, ranging from mild camera shake at 1/30&nbsp;s to large-magnitude
+        streaks at 1/2&nbsp;s. All images pass through the smartphone's native ISP pipeline.
+      </figcaption>
+    </figure>
+    <figure class="gb-figure">
+      <img src="./static/images/examples.jpg" width="1600" height="483"
+           alt="Blurred images from three smartphones across many scenes.">
+      <figcaption>
+        Diverse scenes captured with three devices under identical blur conditions.
+        Rows correspond to Oppo Reno&nbsp;11A, Samsung Galaxy&nbsp;A36&nbsp;5G, and Xiaomi Poco&nbsp;X7;
+        columns show different scenes.
+      </figcaption>
+    </figure>
+    <div class="content has-text-centered">
+      <p>
+        Full-resolution data without alignment and cropping is also available at
+        <a href="https://huggingface.co/datasets/akiomu/GimbalBlur-Fullres">GimbalBlur-Fullres</a>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{gimbalblur,
+  author    = {Muragishi, Akio and Okuda, Masahiro},
+  title     = {{GimbalBlur}: {IMU}-Paired Multi-Device Deblurring Benchmark in the Wild},
+  booktitle = {Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
+  year      = {2027},
+}</code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content has-text-centered">
+          <p>
+            The source code of this website is adapted from the
+            <a href="https://github.com/nerfies/nerfies.github.io">Nerfies website</a>
+            and is licensed under a <a rel="license"
+            href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons
+            Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

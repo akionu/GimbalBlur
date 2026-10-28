@@ -1,0 +1,60 @@
+.link-block a {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.publication-venue {
+    color: #555;
+    font-weight: bold;
+}
+
+.publication-links {
+    margin-top: 1rem;
+}
+
+.author-block {
+  display: inline-block;
+}
+
+/* Justified text leaves wide gaps at phone width */
+@media screen and (max-width: 768px) {
+  .has-text-justified {
+    text-align: left !important;
+  }
+}
+
+.teaser .hero-body {
+  padding-top: 0;
+  padding-bottom: 3rem;
+}
+
+/* Inline SVG icons (replace the Font Awesome script) */
+.svg-icon {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+}
+
+.gb-figure {
+  margin: 0 auto 2.5rem;
+}
+
+.gb-figure:last-child {
+  margin-bottom: 0;
+}
+
+.gb-figure img,
+.gb-figure video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.gb-teaser {
+  max-width: 720px;
+}
+
+.gb-figure figcaption {
+  margin-top: 0.75rem;
+  color: #4a4a4a;
+}

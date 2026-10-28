@@ -1,0 +1,68 @@
+{
+  "pattern": {
+    "inner_corners": [
+      9,
+      6
+    ],
+    "square_size_mm": 25.0
+  },
+  "camera_model": "OpenCV pinhole + Brown-Conrady (cv2.calibrateCamera, default flags)",
+  "distortion_order": "k1,k2,p1,p2,k3",
+  "image_orientation": "pixels as displayed (EXIF Orientation applied, as cv2.imread does by default)",
+  "devices": {
+    "oppo_reno11a": {
+      "fx": 3451.07,
+      "fy": 3434.13,
+      "cx": 2304.56,
+      "cy": 1692.92,
+      "distortion": [
+        0.056040584061001195,
+        -0.43054963394833823,
+        -0.0020382618248742,
+        -0.0025836856717061634,
+        0.7311077878557175
+      ],
+      "image_width": 4624,
+      "image_height": 3468,
+      "rms_reprojection_error_px": 2.8989,
+      "num_images_used": 18,
+      "num_images_total": 18
+    },
+    "samsung_a36": {
+      "fx": 2983.2,
+      "fy": 2969.85,
+      "cx": 2001.64,
+      "cy": 1514.31,
+      "distortion": [
+        0.26078040991610035,
+        -1.1973926821053207,
+        -0.0019109933660613723,
+        -0.005067854199799166,
+        1.6781416121177257
+      ],
+      "image_width": 4080,
+      "image_height": 3060,
+      "rms_reprojection_error_px": 2.4239,
+      "num_images_used": 14,
+      "num_images_total": 14
+    },
+    "xiaomi_pocox7": {
+      "fx": 3157.7,
+      "fy": 3140.83,
+      "cx": 1993.46,
+      "cy": 1538.5,
+      "distortion": [
+        0.10911647209121299,
+        -0.44888787300925986,
+        0.0018538816991352125,
+        -0.006144246863151384,
+        0.2720974791135857
+      ],
+      "image_width": 4096,
+      "image_height": 3072,
+      "rms_reprojection_error_px": 2.3675,
+      "num_images_used": 16,
+      "num_images_total": 16
+    }
+  }
+}
