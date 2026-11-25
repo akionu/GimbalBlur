@@ -3,7 +3,7 @@
 Akio Muragishi and Masahiro Okuda, Doshisha University
 WACV 2027
 
-[Project page](https://akionu.github.io/GimbalBlur/) | Paper (coming soon) | Supplementary (coming soon)
+[Project page](https://akionu.github.io/GimbalBlur/) | [Paper](https://openreview.net/pdf?id=Pb0ULkHCUM) | [Supplementary](https://akionu.github.io/GimbalBlur/static/paper/GimbalBlur_supp.pdf)
 
 GimbalBlur is a real-world smartphone deblurring dataset. Three gimbals replay recorded hand-shake trajectories while carrying three smartphones, so the blurred and sharp images of a pair come from the same sensor and ISP, and all three devices see the same scene under the same blur. Every capture comes with its IMU recording.
 

@@ -40,9 +40,8 @@
           <div class="is-size-5 publication-venue">WACV 2027</div>
 
           <div class="publication-links">
-            <!-- TODO: link to the paper PDF -->
             <span class="link-block">
-              <a href="#"
+              <a href="https://openreview.net/pdf?id=Pb0ULkHCUM"
                  class="external-link button is-normal is-rounded is-dark">
                 <span class="icon">
                   <svg class="svg-icon" aria-hidden="true"><use href="#icon-pdf"></use></svg>
@@ -50,9 +49,8 @@
                 <span>Paper</span>
               </a>
             </span>
-            <!-- TODO: link to the supplementary material -->
             <span class="link-block">
-              <a href="#"
+              <a href="./static/paper/GimbalBlur_supp.pdf"
                  class="external-link button is-normal is-rounded is-dark">
                 <span class="icon">
                   <svg class="svg-icon" aria-hidden="true"><use href="#icon-file"></use></svg>
@@ -135,7 +133,9 @@
             (2)&nbsp;fine-tuning on GimbalBlur improves in-domain PSNR by up to 1.60&nbsp;dB and also raises RealBlur-J PSNR,
             (3)&nbsp;an IMU-aided method trained on other data does not transfer to GimbalBlur without adaptation,
             and (4)&nbsp;device-specific imaging pipelines cause performance gaps exceeding 2&nbsp;dB under identical blur.
-            The dataset and capture system are publicly available.
+            The project page and code are available at
+            <a href="https://akionu.github.io/GimbalBlur/">akionu.github.io/GimbalBlur</a> and
+            <a href="https://github.com/akionu/GimbalBlur">github.com/akionu/GimbalBlur</a>.
           </p>
         </div>
       </div>
@@ -169,8 +169,10 @@
       </figcaption>
     </figure>
     <figure class="gb-figure">
-      <img src="./static/images/examples.jpg" width="1600" height="483"
-           alt="Blurred images from three smartphones across many scenes.">
+      <div class="gb-hscroll">
+        <img src="./static/images/examples.webp" width="16353" height="952"
+             alt="Blurred images from three smartphones across many scenes.">
+      </div>
       <figcaption>
         Diverse scenes captured with three devices under identical blur conditions.
         Rows correspond to Oppo Reno&nbsp;11A, Samsung Galaxy&nbsp;A36&nbsp;5G, and Xiaomi Poco&nbsp;X7;

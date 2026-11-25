@@ -50,6 +50,23 @@
   height: auto;
 }
 
+.gb-hscroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.gb-figure .gb-hscroll img {
+  width: auto;
+  max-width: none;
+  height: 484px;
+}
+
+@media screen and (max-width: 768px) {
+  .gb-figure .gb-hscroll img {
+    height: 300px;
+  }
+}
+
 .gb-teaser {
   max-width: 720px;
 }
